@@ -1,43 +1,24 @@
 const destinationCategories = [
   {
     title: "All",
-    iconName: "hiking"
+    iconName: "add"
   },
   {
-    title: "Beaches",
-    iconName: "beach"
+    title: "Breakfast",
+    iconName: "cafe-outline"
   },
   {
-    title: "Mountains",
-    iconName: "terrain"
+    title: "Lunch",
+    iconName: "fast-food-outline"
+  },
+
+  {
+    title: "Dinner",
+    iconName: "pizza-outline"
   },
   {
-    title: "Cities",
-    iconName: "city"
-  },
-  {
-    title: "Forests",
-    iconName: "tree"
-  },
-  {
-    title: "Lakes",
-    iconName: "swim"
-  },
-  {
-    title: "Historical Sites",
-    iconName: "castle"
-  },
-  {
-    title: "National Parks",
-    iconName: "pine-tree"
-  },
-  {
-    title: "Islands",
-    iconName: "island"
-  },
-  {
-    title: "Deserts",
-    iconName: "weather-sunny"
+    title: "Dessert",
+    iconName: "ice-cream-outline"
   }
 ];
 

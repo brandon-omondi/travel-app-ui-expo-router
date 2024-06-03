@@ -10,27 +10,32 @@ import React from "react";
 import { GroupType } from "@/types/groupType";
 import Colors from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
+import { ItemType } from "@/types/itemTypes";
+import data from "@/data/food.json";
+import { Link } from "expo-router";
 
-const GroupListings = ({ listings }: { listings: GroupType[] }) => {
-  const renderItem: ListRenderItem<GroupType> = ({ item }) => {
+const GroupListings = ({ listings }: { listings: ItemType[] }) => {
+  const renderItem: ListRenderItem<ItemType> = ({ item }) => {
     return (
-      <View style={styles.item}>
-        <Image source={{ uri: item.image }} style={styles.image} />
-        <View>
-          <Text style={styles.itemTxt}>{item.name}</Text>
-          <View style={{flexDirection:'row',alignItems:'center'}}>
-            <Ionicons name="star" size={20} color={Colors.primaryColor} />
-            <Text style={styles.itemRating}>{item.rating}</Text>
-            <Text style={styles.itemReviews}>({item.reviews})</Text>
+      <Link href={`/listing/${item.id}`} asChild>
+        <View style={styles.item}>
+          <Image source={{ uri: item.image}} style={styles.image} />
+          <View>
+            <Text style={styles.itemTxt}>{item.name}</Text>
+            <View style={{flexDirection:'row',alignItems:'center'}}>
+              <Ionicons name="star" size={20} color={Colors.primaryColor} />
+              <Text style={styles.itemRating}>{item.rating}</Text>
+              <Text style={styles.itemReviews}>. 500</Text>
+            </View>
           </View>
         </View>
-      </View>
+      </Link>
     );
   };
 
   return (
     <View style={{ marginVertical: 20 }}>
-      <Text style={styles.title}>Top Travel Groups</Text>
+      <Text style={styles.title}>Picked for you</Text>
       <FlatList
         data={listings}
         renderItem={renderItem}
@@ -53,13 +58,14 @@ const styles = StyleSheet.create({
   item: {
     backgroundColor: Colors.white,
     padding: 10,
+    width:300,
     borderRadius: 10,
     marginRight: 20,
     flexDirection: "row",
     alignItems: "center",
   },
   image: {
-    width: 80,
+    width: '40%',
     height: 100,
     borderRadius: 10,
     marginRight: 10,

@@ -10,11 +10,12 @@ import {
 import React from "react";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { ListingType } from "@/types/listingType";
-import listingData from "@/data/destinations.json";
+import listingData from "@/data/food.json";
 import {
   Feather,
   FontAwesome,
   FontAwesome5,
+  FontAwesome6,
   Ionicons,
 } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
@@ -29,11 +30,27 @@ import Animated, {
 const { width } = Dimensions.get("window");
 const IMG_HEIGHT = 300;
 
+const defaultListing: ListingType = {
+  id: '',
+  name: 'Default Name',
+  image: '',
+  description: 'Default Description',
+  rating: 0,
+  price: '0',
+  duration: '0',
+  location: 'Default Location',
+  category: 'Default Category',
+  delivery: "Default Fee",
+  time: "Default Duration",
+  discount: "",
+  person: "1"
+};
+
 const ListingDetails = () => {
   const { id } = useLocalSearchParams();
-  const listing: ListingType = (listingData as ListingType[]).find(
+  const listing = (listingData as ListingType[]).find(
     (item) => item.id === id
-  );
+  ) ?? defaultListing;
 
   const router = useRouter();
 
@@ -97,12 +114,20 @@ const ListingDetails = () => {
             >
               <View
                 style={{
+                  flexDirection:'row',
+                  alignItems:'center',
+                  justifyContent:'space-between',
                   backgroundColor: Colors.white,
                   padding: 6,
                   borderRadius: 10,
                 }}
               >
-                <Ionicons name="bookmark-outline" size={20} />
+                <FontAwesome6 name="basket-shopping" size={20} />
+                <Text
+                  style={{
+                    fontSize:11,
+                  }}>
+                  Add to Cart</Text>
               </View>
             </TouchableOpacity>
           ),
@@ -136,7 +161,7 @@ const ListingDetails = () => {
                 <View>
                   <Text style={styles.highlightTxt}>Duration</Text>
                   <Text style={styles.highlightTxtVal}>
-                    {listing.duration} Days
+                    {listing.duration} mins
                   </Text>
                 </View>
               </View>
@@ -150,7 +175,7 @@ const ListingDetails = () => {
                 </View>
                 <View>
                   <Text style={styles.highlightTxt}>Person</Text>
-                  <Text style={styles.highlightTxtVal}>{listing.duration}</Text>
+                  <Text style={styles.highlightTxtVal}>{listing.person}</Text>
                 </View>
               </View>
               <View style={{ flexDirection: "row" }}>
@@ -176,10 +201,10 @@ const ListingDetails = () => {
           onPress={() => {}}
           style={[styles.footerBtn, styles.footerBookBtn]}
         >
-          <Text style={styles.footerBtnTxt}>Book Now</Text>
+          <Text style={styles.footerBtnTxt}>Add to cart</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {}} style={styles.footerBtn}>
-          <Text style={styles.footerBtnTxt}>${listing.price}</Text>
+          <Text style={styles.footerBtnTxt}>KES {listing.price}</Text>
         </TouchableOpacity>
       </Animated.View>
     </>

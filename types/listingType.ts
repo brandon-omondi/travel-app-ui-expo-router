@@ -1,4 +1,4 @@
-export interface ListingType {
+export interface ListingType {  
   id: string;
   name: string;
   image: string;
@@ -8,4 +8,9 @@ export interface ListingType {
   duration: string;
   location: string;
   category: string;
+  delivery: string;
+  time: string;
+  discount: string;
+  quantity: string;
+  person: string;  
 }

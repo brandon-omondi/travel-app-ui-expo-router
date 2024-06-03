@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Dimensions
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { ListingType } from "@/types/listingType";
@@ -17,6 +18,8 @@ type Props = {
   listings: any[];
   category: string;
 };
+
+const { width } = Dimensions.get("window");
 
 const Listings = ({ listings, category }: Props) => {
   const [loading, setLoading] = useState(false);
@@ -34,15 +37,25 @@ const Listings = ({ listings, category }: Props) => {
     return (
       <Link href={`/listing/${item.id}`} asChild>
         <TouchableOpacity>
+
+          {/* card */}
           <View style={styles.item}>
+
+            {/* image */}
             <Image source={{ uri: item.image }} style={styles.image} />
             <View style={styles.bookmark}>
-              <Ionicons
-                name="bookmark-outline"
-                size={20}
-                color={Colors.white}
-              />
+            <Text style={styles.bookmarkTxt} numberOfLines={1} ellipsizeMode="tail">
+              {item.time}
+            </Text>
             </View>
+            <View style={styles.discount}>
+            <Text style={styles.discountTxt} numberOfLines={1} ellipsizeMode="tail">
+              {item.discount}
+            </Text>
+            </View>
+
+            {/* Card Text */}
+            <View>
             <Text style={styles.itemTxt} numberOfLines={1} ellipsizeMode="tail">
               {item.name}
             </Text>
@@ -50,14 +63,10 @@ const Listings = ({ listings, category }: Props) => {
               style={{ flexDirection: "row", justifyContent: "space-between" }}
             >
               <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <FontAwesome5
-                  name="map-marker-alt"
-                  size={18}
-                  color={Colors.primaryColor}
-                />
                 <Text style={styles.itemLocationTxt}>{item.location}</Text>
               </View>
-              <Text style={styles.itemPriceTxt}>${item.price}</Text>
+              <Text style={styles.itemPriceTxt}>KES {item.price}</Text>
+            </View>
             </View>
           </View>
         </TouchableOpacity>
@@ -70,7 +79,6 @@ const Listings = ({ listings, category }: Props) => {
       <FlatList
         data={loading ? [] : listings}
         renderItem={renderItems}
-        horizontal
         showsHorizontalScrollIndicator={false}
       />
     </View>
@@ -84,24 +92,47 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     padding: 10,
     borderRadius: 10,
-    marginRight: 20,
-    width: 220,
+    marginHorizontal: 10,
+    width: '95%',
+    marginBottom: 30,
   },
   image: {
-    width: 200,
+    width: '100%',
     height: 200,
     borderRadius: 10,
     marginBottom: 30,
   },
   bookmark: {
     position: "absolute",
-    top: 185,
-    right: 30,
-    backgroundColor: Colors.primaryColor,
+    top: 150,
+    left: 30,
+    backgroundColor: Colors.deltime,
     padding: 10,
-    borderRadius: 30,
-    borderWidth: 2,
-    borderColor: Colors.white,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: Colors.deltime,
+  },
+  bookmarkTxt:{
+    fontSize: 11,
+    fontWeight: "600",
+    color: Colors.black,
+    
+  },
+  discount: {
+    position: "absolute",
+    top: 150,
+    right: 30,
+    backgroundColor: Colors.pill,
+    padding: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: Colors.deltime,
+  },
+  discountTxt:{
+    fontSize: 11,
+    fontWeight: "600",
+    color: Colors.red,
+    
   },
   itemTxt: {
     fontSize: 16,

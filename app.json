@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "expo-travel-app",
-    "slug": "expo-travel-app",
+    "slug": "ecomm",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -30,10 +30,20 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "b83fd99f-c8da-48da-a3c5-579c08751b6a"
+      }
+    },
+    "owner": "lab-xyz"
   }
 }

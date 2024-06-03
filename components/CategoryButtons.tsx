@@ -8,7 +8,7 @@ import {
 import React, { useRef, useState } from "react";
 import Colors from "@/constants/Colors";
 import destinationCategories from "@/data/categories";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Ionicons } from '@expo/vector-icons';
 
 type Props = {
   onCagtegoryChanged: (category: string) => void;
@@ -54,7 +54,7 @@ const CategoryButtons = ({onCagtegoryChanged}: Props) => {
                 : styles.categoryBtn
             }
           >
-            <MaterialCommunityIcons
+            <Ionicons
               name={item.iconName as any}
               size={20}
               color={activeIndex === index ? Colors.white : Colors.black}
